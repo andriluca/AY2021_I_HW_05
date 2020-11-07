@@ -1,22 +1,17 @@
 /* ========================================
- *
- * Copyright YOUR COMPANY, THE YEAR
- * All Rights Reserved
- * UNPUBLISHED, LICENSED SOFTWARE.
- *
- * CONFIDENTIAL AND PROPRIETARY INFORMATION
- * WHICH IS THE PROPERTY OF your company.
- *
+ * Assignment #1, Luca Andriotto
  * ========================================
 */
 
 #ifndef __INTERRUPT_H
     #define __INTERRUPT_H
     #include "cytypes.h"
-    #include "i2c.h"
+    #include "define.h"
+    
+    uint8 outputDataRate;                           // keeps track of ODR changes
+    volatile uint8_t writeMemory;                   // keeps track of button states
     
     CY_ISR_PROTO(SW_ISR);
     
 #endif
 
-/* [] END OF FILE */
