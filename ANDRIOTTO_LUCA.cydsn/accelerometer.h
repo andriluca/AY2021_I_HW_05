@@ -21,6 +21,10 @@
     
     ErrorCode I2C_LIS3DH_Get_Data(float32* data);
     
+    ErrorCode I2C_LIS3DH_Send_Data(uint8_t* out, float32* data);
+    
+    ErrorCode I2C_LIS3DH_Send_Raw_Data(uint8_t* out, int16_t* data);
+    
 #endif
 
 

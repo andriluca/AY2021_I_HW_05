@@ -25,7 +25,7 @@
     #define LIS3DH_HI_RES_CTRL_REG4     0x18        // totale
     
     #define GRAVITY                     9.81
-    #define LIS3DH_SENSITIVITY          2
+    #define LIS3DH_SENSITIVITY          2.0
     #define CONVERSION                  LIS3DH_SENSITIVITY*0.001*GRAVITY    // m/(s^2 * digit)
     
     #define EEPROM_REGISTER             0x0000
@@ -35,7 +35,19 @@
     #define LIS3DH_TOTAL_BITS           16
     #define LIS3DH_RIGHT_SHIFT          (LIS3DH_TOTAL_BITS - LIS3DH_RESOLUTION)
     
+    #define REQUIRED_BYTES              12
+    #define RAW_REQUIRED_BYTES          6
+    #define BYTE_TO_TRANSFER            1 + REQUIRED_BYTES + 1
+    #define RAW_BYTE_TO_TRANSFER        1 + RAW_REQUIRED_BYTES + 1
+    #define FLOAT_LIMIT                 2147483648UL
+    
     uint8 outputDataRate;
+    uint8_t out[BYTE_TO_TRANSFER];
+    uint8_t raw_out[RAW_BYTE_TO_TRANSFER];
+    volatile uint8_t writeMemory;
+    
+    
+
     
 #endif
 
