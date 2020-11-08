@@ -1,5 +1,5 @@
 /* ========================================
- * Assignment #1, Luca Andriotto
+ * Assignment #05, Luca Andriotto
  * ========================================
 */
 
@@ -8,6 +8,11 @@
     #define ACCELEROMETER_H
     #include "i2c.h"
     #include "define.h"
+    
+    // The union is the trick to decompose a float into its constituting bytes.
+    // Before a byte from outtype foo.mask is sent, a bit-to-bit AND operation
+    // is performed considering foo.data and foo.mask.
+    // This normally isn't possible when handling floats. Magic!
     
     typedef union
     {
@@ -24,7 +29,8 @@
  * Input:       
  * Returns:     ErrorCode
  * Description: 
- *     Initialization of the LIS3DH Config Registers
+ *     Initialization of the LIS3DH Config Registers. 
+ *     It gathers ODR from EEPROM.
 \*****************************************************************************/
    
     ErrorCode I2C_LIS3DH_Start();
@@ -40,5 +46,3 @@
     ErrorCode I2C_LIS3DH_Manage_Data(outtype* array);
     
 #endif
-
-

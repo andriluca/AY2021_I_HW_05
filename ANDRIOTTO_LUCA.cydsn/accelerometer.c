@@ -1,5 +1,5 @@
 /* ========================================
- * Assignment #1, Luca Andriotto
+ * Assignment #05, Luca Andriotto
  * ========================================
 */
 
@@ -21,7 +21,8 @@ ErrorCode I2C_LIS3DH_Start()
     // Reading EEPROM register dedicated to startup ODR
     // Checking if the memorized value is in allowed range
     // if the value is out of range --> ODR is set to 1Hz
-    if(EEPROM_ReadByte(EEPROM_REGISTER) > 6){
+    if(EEPROM_ReadByte(EEPROM_REGISTER) > 6)
+    {
         EEPROM_UpdateTemperature();
         EEPROM_WriteByte(EEPROM_INIT_VALUE,EEPROM_REGISTER);
     }
@@ -49,6 +50,7 @@ ErrorCode I2C_LIS3DH_Manage_Data(outtype* array)
 
     // Array dedicated to save accelerometer data in digit.
     int16_t sensorData[3];
+        
     
     // Data acquisition
     I2C_LIS3DH_Get_Raw_Data(sensorData);
@@ -68,6 +70,7 @@ ErrorCode I2C_LIS3DH_Manage_Data(outtype* array)
     
     // Sending the populated array
     UART_PutArray(out,BYTE_TO_TRANSFER);
+    
     return NO_ERROR;
 }
 
@@ -75,11 +78,11 @@ ErrorCode I2C_LIS3DH_Get_Raw_Data(int16_t* data)
 {
     uint8_t sensorData[LIS3DH_OUT_N]; // This array is storing left aligned bytes coming from accelerometer
     
-    // Storing the data coming from accelerometer
-    uint8_t error = I2C_Peripheral_ReadRegisterMulti(LIS3DH_DEVICE_ADDRESS, LIS3DH_OUT_X_L, LIS3DH_OUT_N, sensorData);
+    // if new data are available --> storing them from accelerometer
+    I2C_Peripheral_ReadRegisterMulti(LIS3DH_DEVICE_ADDRESS, LIS3DH_OUT_X_L, LIS3DH_OUT_N, sensorData);
     
     // Re-arranging data to have them right aligned as integers
     for(int i = 0; i < LIS3DH_OUT_AXES; i++) data[i] = (int16_t)((sensorData[2*i+1]<<8 | sensorData[2*i])) >> LIS3DH_RIGHT_SHIFT;   
     
-    return error ? ERROR : NO_ERROR;
+    return NO_ERROR;
 }

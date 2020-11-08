@@ -1,9 +1,9 @@
 /* ========================================
- * Assignment #1, Luca Andriotto
+ * Assignment #05, Luca Andriotto
  * ========================================
 */
 
-#include "utils.h"
+#include "stats.h"
 
 void doButtonPressed();
 
@@ -30,14 +30,24 @@ void init()
     writeMemory = 0;
 }
 
-void loop()
+void stateMachine()
 {
+    /*    -----> [zyxda]-----------
+         /                         \
+         |                          v
+        IDLE -> [pressing] --> S1   S2
+         ^                     |    |
+         |                     |    |
+         \____________________ /<___/
+    */
     for(;;)
     {
-        // Checking if the button is pressed
+        // IDLE: Reading status register
+        I2C_Peripheral_ReadRegister(LIS3DH_DEVICE_ADDRESS,LIS3DH_STATUS_REG,&zyxda);        
+        // S0: Checking if the button is pressed
         if(writeMemory) doButtonPressed();
-        // Populating and sending the array through UART
-        I2C_LIS3DH_Manage_Data(outarray);
+        // S1: Populating and sending the array through UART
+        if(zyxda & LIS3DH_ZYXDA_STATUS_REG) I2C_LIS3DH_Manage_Data(outarray);
     }
 }
 

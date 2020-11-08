@@ -1,23 +1,23 @@
 /* ========================================
- * Assignment #1, Luca Andriotto
+ * Assignment #05, Luca Andriotto
  * ========================================
 */
 
 #ifndef __DEFINE_H
     #define __DEFINE_H
-    #include "project.h"
-    //#include "accelerometer.h"
     
     // addresses
     #define LIS3DH_DEVICE_ADDRESS       0x18        // Accelerometer's slave address (SAD)
     #define LIS3DH_CTRL_REG1            0x20        // Register 1 --> setup Hi Res Mode (ODRs' selection happens in interrupt)
     #define LIS3DH_CTRL_REG4            0x23        // Register 4 --> setup FS[1:0] + LIS3DH_SENSITIVITY (use masks below)
+    #define LIS3DH_STATUS_REG           0x27        // Status Register
     #define LIS3DH_OUT_X_L              0x28        // First output register
     #define LIS3DH_OUT_N                6           // Number of output registers
     #define LIS3DH_OUT_AXES             3           // Accelerometer's number of axes
     
     // data values
     #define LIS3DH_HI_RES_CTRL_REG1     0x07        // Partial mask: the rest is initialized and modified by the interrupt
+    #define LIS3DH_ZYXDA_STATUS_REG     0x08        // New available data incoming from the register
     
     // Full Scale Range. This values can be changed 
     // FS: 00 --> 2g  01 --> 4g 10 --> 8g 11 --> 16g
@@ -31,8 +31,14 @@
     #define GRAVITY                     9.81                                // ms^-2
     #define CONVERSION                  LIS3DH_SENSITIVITY*0.001*GRAVITY    // ms^-2*digit^-1
     
-    #define EEPROM_REGISTER             0x0000                              // EEPROM register for initialization
-    #define EEPROM_INIT_VALUE           0x01                                // Initial value if cell content was incosistent
+    #define EEPROM_REGISTER             0x000f                              // EEPROM register for initialization
+    #define EEPROM_INIT_VALUE           0x00                                // Initial value if cell content was incosistent.
+                                                                            // 0x00 -->   1Hz   chosen
+                                                                            // 0x01 -->  10Hz
+                                                                            // 0x02 -->  25Hz
+                                                                            // 0x03 -->  50Hz
+                                                                            // 0x04 --> 100Hz
+                                                                            // 0x00 --> 200Hz
     
     #define LIS3DH_RESOLUTION           12                                          // Hi Res
     #define LIS3DH_TOTAL_BITS           16                                          // Bits to memorize data (in digit)

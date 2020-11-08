@@ -1,12 +1,13 @@
 /* ========================================
- * Assignment #1, Luca Andriotto
+ * Assignment #05, Luca Andriotto
  * ========================================
 */
 
 #ifndef __I2C_H
     #define __I2C_H
-    #include "I2C_Master.h"
+    #include "project.h"
     
+    // This enum is encoding the error condition
     typedef enum
     {
         NO_ERROR,
@@ -34,6 +35,19 @@
 \*****************************************************************************/
     
     ErrorCode I2C_Peripheral_Stop();
+
+/*****************************************************************************\
+ * Function:    I2C_Peripheral_Stop
+ * Input:       
+ * Returns:     ErrorCode
+ * Description: 
+ *     Reading through I2C of a single register.
+\*****************************************************************************/
+
+    
+    ErrorCode I2C_Peripheral_ReadRegister(uint8_t device_address, 
+                                            uint8_t register_address,
+                                            uint8_t* data);
     
 /*****************************************************************************\
  * Function:    I2C_Peripheral_ReadRegisterMulti

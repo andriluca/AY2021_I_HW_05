@@ -1,12 +1,12 @@
 /* ========================================
- * Assignment #1, Luca Andriotto
+ * Assignment #05, Luca Andriotto
  * ========================================
 */
 
-#include "utils.h"
+#include "stats.h"
 
 int main(void)
 {
-    init(); // initialization of the peripherals and
-    loop(); // acquiring and sending data at a specific ODR
+    init();         // initialization of the peripherals and variables
+    stateMachine(); // executing the state machine
 }
