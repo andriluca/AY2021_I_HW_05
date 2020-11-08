@@ -3,7 +3,7 @@
  * ========================================
 */
 
-#include "stats.h"
+#include "states.h"
 
 void doButtonPressed();
 
@@ -38,7 +38,7 @@ void stateMachine()
         IDLE -> [pressing] --> S1   S2
          ^                     |    |
          |                     |    |
-         \____________________ /<___/
+         \---------------------/<---/
     */
     for(;;)
     {

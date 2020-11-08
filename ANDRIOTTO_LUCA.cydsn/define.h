@@ -20,11 +20,10 @@
     #define LIS3DH_ZYXDA_STATUS_REG     0x08        // New available data incoming from the register
     
     // Full Scale Range. This values can be changed 
-    // FS: 00 --> 2g  01 --> 4g 10 --> 8g 11 --> 16g
-    #define LIS3DH_HI_RES_CTRL_REG4_FS0 0x00    // --> So = 1   
-    #define LIS3DH_HI_RES_CTRL_REG4_FS1 0x10    // --> So = 2   chosen
-    #define LIS3DH_HI_RES_CTRL_REG4_FS2 0x20    // --> So = 4   
-    #define LIS3DH_HI_RES_CTRL_REG4_FS3 0x30    // --> So = 12
+    #define LIS3DH_HI_RES_CTRL_REG4_FS0 0x00    // FS = [-2, +2]g   --> So = 1   
+    #define LIS3DH_HI_RES_CTRL_REG4_FS1 0x10    // FS = [-4, +4]g   --> So = 2   chosen
+    #define LIS3DH_HI_RES_CTRL_REG4_FS2 0x20    // FS = [-8, +8]g   --> So = 4   
+    #define LIS3DH_HI_RES_CTRL_REG4_FS3 0x30    // FS = [-16, +16]g --> So = 12
     #define LIS3DH_HI_RES_CTRL_REG4     0x08 | LIS3DH_HI_RES_CTRL_REG4_FS1
     #define LIS3DH_SENSITIVITY          2                                   // mg/digit
     

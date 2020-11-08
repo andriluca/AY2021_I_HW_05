@@ -3,9 +3,9 @@
  * ========================================
 */
 
-#ifndef __STATS_H
+#ifndef __STATES_H
     
-    #define __STATS_H
+    #define __STATES_H
     #include "accelerometer.h"
     #include "interrupt.h"
     
