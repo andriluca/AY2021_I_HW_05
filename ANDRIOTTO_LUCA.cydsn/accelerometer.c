@@ -21,7 +21,7 @@ ErrorCode I2C_LIS3DH_Start()
     // Reading EEPROM register dedicated to startup ODR
     // Checking if the memorized value is in allowed range
     // if the value is out of range --> ODR is set to 1Hz
-    if(EEPROM_ReadByte(EEPROM_REGISTER) > 6)
+    if(EEPROM_ReadByte(EEPROM_REGISTER) > EEPROM_FINAL_VALUE)
     {
         EEPROM_UpdateTemperature();
         EEPROM_WriteByte(EEPROM_INIT_VALUE,EEPROM_REGISTER);
@@ -56,19 +56,20 @@ ErrorCode I2C_LIS3DH_Manage_Data(outtype* array)
     I2C_LIS3DH_Get_Raw_Data(sensorData);
     
     // Data conversion
-    for(int i = 0; i < LIS3DH_OUT_AXES; i++)  array[i].data = sensorData[i] * CONVERSION;
+    for(int i = 0; i < LIS3DH_OUT_AXES; i++)  
+	array[i].data = sensorData[i] * CONVERSION; // populating the array's float data.
     
     // Counters
     int arrayIndex=0, shiftIndex=0;    // arrayIndex is used to browse the array cells. 
                                        // shiftIndex is used in order to perform the right shift operation on the data.
     for(int count = 1; count < BYTE_TO_TRANSFER - 1; count++) 
     {
-        out[count] = array[arrayIndex].mask>>8*shiftIndex & 0xff;   // populating the union in its float argument
-        shiftIndex=(shiftIndex+1) % BYTES_PER_AXIS;                 // updating the shift index
+        out[count] = array[arrayIndex].mask>>8*shiftIndex & 0xff;   // populating the buffer with binary translated float properly masked.
+        shiftIndex=(shiftIndex+1) % BYTES_PER_AXIS;                 // updating the shift index.
         if(!(count % BYTES_PER_AXIS)) arrayIndex++;                 // updating the array index, once all the data related to one axis are gathered.
     }
     
-    // Sending the populated array
+    // Sending data buffer
     UART_PutArray(out,BYTE_TO_TRANSFER);
     
     return NO_ERROR;
@@ -78,7 +79,7 @@ ErrorCode I2C_LIS3DH_Get_Raw_Data(int16_t* data)
 {
     uint8_t sensorData[LIS3DH_OUT_N]; // This array is storing left aligned bytes coming from accelerometer
     
-    // if new data are available --> storing them from accelerometer
+    // Storing data in temporary array.
     I2C_Peripheral_ReadRegisterMulti(LIS3DH_DEVICE_ADDRESS, LIS3DH_OUT_X_L, LIS3DH_OUT_N, sensorData);
     
     // Re-arranging data to have them right aligned as integers

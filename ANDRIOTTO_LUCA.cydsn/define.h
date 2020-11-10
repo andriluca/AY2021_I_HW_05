@@ -20,24 +20,26 @@
     #define LIS3DH_ZYXDA_STATUS_REG     0x08        // New available data incoming from the register
     
     // Full Scale Range. This values can be changed 
-    #define LIS3DH_HI_RES_CTRL_REG4_FS0 0x00    // FS = [-2, +2]g   --> So = 1   
-    #define LIS3DH_HI_RES_CTRL_REG4_FS1 0x10    // FS = [-4, +4]g   --> So = 2   chosen
-    #define LIS3DH_HI_RES_CTRL_REG4_FS2 0x20    // FS = [-8, +8]g   --> So = 4   
+    #define LIS3DH_HI_RES_CTRL_REG4_FS0 0x00    // FS = [-2, +2]g   --> So =  1   chosen
+    #define LIS3DH_HI_RES_CTRL_REG4_FS1 0x10    // FS = [-4, +4]g   --> So =  2
+    #define LIS3DH_HI_RES_CTRL_REG4_FS2 0x20    // FS = [-8, +8]g   --> So =  4   
     #define LIS3DH_HI_RES_CTRL_REG4_FS3 0x30    // FS = [-16, +16]g --> So = 12
-    #define LIS3DH_HI_RES_CTRL_REG4     0x08 | LIS3DH_HI_RES_CTRL_REG4_FS1
-    #define LIS3DH_SENSITIVITY          2                                   // mg/digit
+    #define LIS3DH_HI_RES_CTRL_REG4     0x08 | LIS3DH_HI_RES_CTRL_REG4_FS0
+    #define LIS3DH_SENSITIVITY          1                                   // mg/digit
     
     #define GRAVITY                     9.81                                // ms^-2
     #define CONVERSION                  LIS3DH_SENSITIVITY*0.001*GRAVITY    // ms^-2*digit^-1
     
-    #define EEPROM_REGISTER             0x000f                              // EEPROM register for initialization
-    #define EEPROM_INIT_VALUE           0x00                                // Initial value if cell content was incosistent.
-                                                                            // 0x00 -->   1Hz   chosen
-                                                                            // 0x01 -->  10Hz
-                                                                            // 0x02 -->  25Hz
-                                                                            // 0x03 -->  50Hz
-                                                                            // 0x04 --> 100Hz
-                                                                            // 0x00 --> 200Hz
+    #define EEPROM_REGISTER             0x00ff                              // EEPROM register for initialization
+    #define EEPROM_INIT_VALUE           EEPROM_ODR_1                        // Initial value if cell content was incosistent.
+    #define EEPROM_FINAL_VALUE          EEPROM_ODR_200                      // Final encoded value
+    #define EEPROM_TOTAL_ODRS           6
+    #define EEPROM_ODR_1                0x00                                //   1Hz   chosen
+    #define EEPROM_ODR_10               0x01                                //  10Hz
+    #define EEPROM_ODR_25               0x02                                //  25Hz
+    #define EEPROM_ODR_50               0x03                                //  50Hz
+    #define EEPROM_ODR_100              0x04                                // 100Hz
+    #define EEPROM_ODR_200              0x05                                // 200Hz
     
     #define LIS3DH_RESOLUTION           12                                          // Hi Res
     #define LIS3DH_TOTAL_BITS           16                                          // Bits to memorize data (in digit)

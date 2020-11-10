@@ -3,6 +3,7 @@
  * ========================================
 */
 
+// including library related to state machine
 #include "states.h"
 
 int main(void)

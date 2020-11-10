@@ -8,9 +8,9 @@
 
 CY_ISR_PROTO(SW_ISR)
 {
-    // updating ODR
-    outputDataRate = ((outputDataRate + 1) % 6);
-    // setting flag to 1
+    // updating ODR.
+    outputDataRate = ((outputDataRate + 1) % EEPROM_TOTAL_ODRS);
+    // setting flag to 1.
     writeMemory = 1;
 }
 
