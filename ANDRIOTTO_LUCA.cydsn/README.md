@@ -15,6 +15,6 @@
 1. "interrupt.h" > CY_\__ISR\_PROTO(SW_\__ISR):
     - Updates circularly a variable representing the ODR. It also sets up a flag in order for the "states.h" > stateMachine() to write the updated value to the EEPROM.
 1. "states.h" > stateMachine()
-    - Checks out new available data by reading the Status Register of LIS3DH.
+    - If a timeout has occurred, the data buffer is sent through UART.
 1. "accelerometer.h" > I2C\_LIS3DH\_Manage\_Data(outtype* array):
     - Acquires the data from LIS3DH module (digit), converts it in ms^-2 and sends them as float to BCP. The obtained precision is the one of floating point data.

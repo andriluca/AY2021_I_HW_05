@@ -8,6 +8,8 @@
     #define ACCELEROMETER_H
     #include "i2c.h"
     #include "define.h"
+    #include "interrupt.h"
+    #include "states.h"
     
     // The union is the trick to decompose a float into its constituting bytes.
     // It behaves like a "binary translator" for floats.

@@ -9,8 +9,7 @@
     #include "accelerometer.h"
     #include "interrupt.h"
     
-    // to check status register --> sampling only if new data are available
-    uint8_t zyxda;
+    
 
 /*****************************************************************************\
  * Function:    init
