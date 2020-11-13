@@ -6,17 +6,17 @@
 #ifndef ACCELEROMETER_H
 
     #define ACCELEROMETER_H
+
     #include "i2c.h"
     #include "define.h"
     #include "interrupt.h"
-    #include "states.h"
-    
+
     // The union is the trick to decompose a float into its constituting bytes.
     // It behaves like a "binary translator" for floats.
     // By storing in its float32 argument the data and then masking its uint32_t
     // argument it's possible to send floating point data as bytes.
     // This normally isn't possible when handling floating point data.
-    
+
     typedef union
     {
         float32 data;

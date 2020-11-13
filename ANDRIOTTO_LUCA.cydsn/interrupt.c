@@ -8,7 +8,7 @@
 CY_ISR_PROTO(SW_ISR)
 {
     // updating ODR.
-    outputDataRate = ((outputDataRate + 1) % EEPROM_TOTAL_ODRS); // --> cycle starting from 0.
+    outputDataRate = (outputDataRate - EEPROM_INIT_VALUE + 1) % EEPROM_TOTAL_ODRS + EEPROM_INIT_VALUE;
     // setting flag to 1.
     onButtonPressed = 1;
 }
