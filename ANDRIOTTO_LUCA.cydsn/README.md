@@ -9,13 +9,12 @@
 
 ### Features required by the context
 1. _"utils.h" > init()_: 
-    - Checks if the content of the EEPROM Register is out of the encoded values configures it correctly.
+    - Checks if the content of the EEPROM Register is out of the encoded values and configures it correctly.
 1. _"accelerometer.h" > I2C\_LIS3DH\_Start()_:
     - Writes the configuration register to make LIS3DH module work correctly.
 1. _"interrupt.h" > CY\_ISR\_PROTO(SW\_ISR)_:
     - Updates circularly a variable representing the ODR. It also sets up a flag in order for the "states.h" > stateMachine() to write the updated value to the EEPROM.
 1. _"states.h" > stateMachine()_
-    - Checks out, at the timer's frequency, new available data by reading the Status Register of LIS3DH.
-    - By commenting the line _if(onTimeout)_ the code is able to bypass the timer and check the status register at the microcontroller's frequency.
+    - Checks out new available data by reading the Status Register of LIS3DH.
 1. _"accelerometer.h" > I2C\_LIS3DH\_Manage\_Data(outtype* array)_:
     - Acquires the data from LIS3DH module (digit), converts it in ms^-2 and sends them as float to BCP. The obtained precision is the one of floating point data.

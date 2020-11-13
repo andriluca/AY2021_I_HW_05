@@ -12,11 +12,3 @@ CY_ISR_PROTO(SW_ISR)
     // setting flag to 1.
     onButtonPressed = 1;
 }
-
-CY_ISR_PROTO(TIMER_CHECK_STATUS_ISR)
-{
-	// Clearing the interrupt on TC.
-    Timer_Check_Status_ReadStatusRegister();
-	// Setting the timeout flag.
-    onTimeout = 1;
-}
